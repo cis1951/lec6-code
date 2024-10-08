@@ -83,7 +83,7 @@ struct ContentView: View {
 }
 ```
 
-Now when this button is clicked, we want to generate the bubbles, and then start the game. Let's make a function called `startGame` to handle this for us, so it will set `gameStarted = true` and for now, generate 10 bubbles randomly. Let's make the size random from 20 to 50, and have them appear anywhere on the screen. For now, you can use `UIScreen.main.bounds.width` to get the width of the screen, but we will change this later. Note you should NEVER use `UIScreen.main` for layout, and we will fix this later (it won't work on some platforms, and it contradicts the idea of views). Note that (0, 0) is in the TOP LEFT of the screen, and positive y goes downwards.
+Now when this button is clicked, we want to generate the bubbles, and then start the game. Let's make a function called `startGame` to handle this for us, so it will set `gameStarted = true` and for now, generate 10 bubbles randomly. Let's make the size random from 20 to 50, and have them appear anywhere on the screen. For now, you can use `UIScreen.main.bounds.width` to get the width of the screen, but we will fix this later. Note you should **NEVER** use `UIScreen.main` in practice (it won't work on some platforms (like VisionOS!), and it contradicts the idea of views for sizing). Note that (0, 0) is in the TOP LEFT of the screen, and positive y goes downwards.
 
 Thus the function looks like:
 
