@@ -1,13 +1,13 @@
 # Bubble Game!
 This README contains the instructions and code for **Lecture 6: Custom Views & Event Handling**.
 
-Here, we're going to build a game! In this game, bubbles will pop up on the screen, and based on their appearance you will have to perform different gestures to clear them. You can restart the game when you're done, and also add other neat features/interesting looking bubbles.
+We're going to build a game! In this game, bubbles will pop up on the screen, and based on their appearance you will have to perform different gestures to clear them. You can restart the game when you're done, and also add other neat features/interesting looking bubbles.
 
 Here's a walkthrough of the steps we cover in lecture:
 
 ## Step 0
 
-Create a new XCode project. You can call it BubbleGame if you wish (store it in the `apps` directory).
+Create a new Xcode project. You can call it BubbleGame if you wish (store it in the `apps` directory).
 
 ## Step 1
 
@@ -25,7 +25,7 @@ struct Bubble: Identifiable {
 
 ## Step 2
 
-Now let's create the main view. In `ContentView`, let's start by adding a button to start the game. We'll also want to add a `ZStack` to put the bubbles on below the button, and let's give the `ZStack` an infinite maxWidth and maxHeight so it takes up the whole screen. So it will start something like this:
+Now let's create the main view. In `ContentView`, let's start by adding a button to start the game. We'll also want to add a `ZStack` to put the bubbles below the button, and let's give the `ZStack` an infinite maxWidth and maxHeight so it takes up the whole screen. So it will start something like this:
 
 ```swift
 struct ContentView: View {
@@ -93,7 +93,7 @@ private func startGame() {
         let size = CGFloat.random(in: 20...50)
         let x = CGFloat.random(in: 0...UIScreen.main.bounds.width)
         let y = CGFloat.random(in: 0...UIScreen.main.bounds.height)
-        let bubble = Bubble(color: Color.blue, x, y: y, size: size)
+        let bubble = Bubble(color: Color.blue, x: x, y: y, size: size)
         bubbles.append(bubble)
     }
 
@@ -306,11 +306,9 @@ struct GameAreaView: View {
     }
 }
 
-struct GameAreaView_Previews: PreviewProvider {
-    @State static var gameStarted = true
-    static var previews: some View {
-        GameAreaView(gameStarted: $gameStarted)
-    }
+#Preview {
+    @Previewable @State var gameStarted = false
+    return GameAreaView(gameStarted: $gameStarted)
 }
 ```
 
@@ -425,6 +423,14 @@ private func startGame(size: CGSize) {
 }
 ```
 
+Additionally, if you want to fix the preview in `BubbleView`, you can use:
+
+```swift
+#Preview {
+    BubbleView(bubble: Bubble(color: Color.blue, boundary: UIScreen.main.bounds.size))
+}
+```
+
 ## Step 10
 
 Now let's change the BubbleView based on the type. If it is type `tap`, let's just add the number to the center. If it's type `swipe`, let's add an arrow in the corresponding direction, like so:
@@ -452,11 +458,11 @@ struct BubbleView: View {
 }
 
 #Preview {
-    BubbleView(bubble: Bubble(color: Color.blue, x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2, size: 50, type: .tap, tapCount: 2))
+    BubbleView(bubble: Bubble(color: Color.blue, boundary: UIScreen.main.bounds.size))
 }
 ```
 
-While we're here, modify the background so it's something cool! Maybe add different Strokes to the border, maybe make it an image, do something fun! We'll use the following:
+While we're here, modify the background so it's something cool! Maybe add different strokes to the border, maybe make it an image, do something fun! We'll use the following:
 
 ```swift
 struct BubbleView: View {
@@ -529,7 +535,9 @@ BubbleView(bubble: bubble)
     )
 ```
 
-Note the minimumDistance, which is the smallest distance for that gesture to trigger the activation. Then, once this gesture ends, we take the value's translation to calculate the angle of the drag. Then this angle is passed into the `tryRemoveBubble` function. Now if you try it out, you will notice that the bubbles just pop into and out of existence. Let's give it a nice animation. To do this, it's really simple. Just wrap the `tryRemoveBubble` in a `withAnimation` like so:
+Note the minimumDistance, which is the smallest distance for that gesture to trigger the activation. Then, once this gesture ends, we take the value's translation to calculate the angle of the drag. Then this angle is passed into the `tryRemoveBubble` function.
+
+Now if you try it out, you will notice that the bubbles just pop into and out of existence. Let's give it a nice animation. To do this, it's really simple. Just wrap the `tryRemoveBubble` in a `withAnimation` like so:
 
 ```swift
 BubbleView(bubble: bubble)

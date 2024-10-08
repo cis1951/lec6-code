@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  Lec6 Code
 //
-//  Created by Jordan H on 2/22/24.
+//  Created by CIS 1951 Staff on 2/22/24.
 //
 
 import SwiftUI

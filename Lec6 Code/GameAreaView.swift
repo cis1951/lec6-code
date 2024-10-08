@@ -2,7 +2,7 @@
 //  GameAreaView.swift
 //  Lec6 Code
 //
-//  Created by Jordan H on 2/22/24.
+//  Created by CIS 1951 Staff on 2/22/24.
 //
 
 import SwiftUI
@@ -44,7 +44,7 @@ struct GameAreaView: View {
         bubbles.removeAll()
         
         for _ in 1...10 {
-            bubbles.append(Bubble(color: Color.blue, boundry: size))
+            bubbles.append(Bubble(color: Color.blue, boundary: size))
         }
     }
 
@@ -73,9 +73,7 @@ struct GameAreaView: View {
     }
 }
 
-struct GameAreaView_Previews: PreviewProvider {
-    @State static var gameStarted = true
-    static var previews: some View {
-        GameAreaView(gameStarted: $gameStarted)
-    }
+#Preview {
+    @Previewable @State var gameStarted = false
+    return GameAreaView(gameStarted: $gameStarted)
 }

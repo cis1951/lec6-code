@@ -2,7 +2,7 @@
 //  BubbleModel.swift
 //  Lec6 Code
 //
-//  Created by Jordan H on 2/22/24.
+//  Created by CIS 1951 Staff on 2/22/24.
 //
 
 import Foundation
@@ -24,11 +24,11 @@ struct Bubble: Identifiable {
         self.tapCount = tapCount
     }
     
-    public init(color: Color, boundry: CGSize) {
+    public init(color: Color, boundary: CGSize) {
         self.color = color
         self.size = CGFloat.random(in: 20...50)
-        self.x = CGFloat.random(in: self.size...boundry.width - self.size)
-        self.y = CGFloat.random(in: self.size...boundry.height - self.size)
+        self.x = CGFloat.random(in: self.size...boundary.width - self.size)
+        self.y = CGFloat.random(in: self.size...boundary.height - self.size)
         self.type = BubbleType.allCases.randomElement()!
         
         switch self.type {

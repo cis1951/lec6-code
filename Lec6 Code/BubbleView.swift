@@ -2,7 +2,7 @@
 //  BubbleView.swift
 //  Lec6 Code
 //
-//  Created by Jordan H on 2/22/24.
+//  Created by CIS 1951 Staff on 2/22/24.
 //
 
 import SwiftUI
@@ -33,6 +33,6 @@ struct BubbleView: View {
 
 #if os(iOS)
 #Preview {
-    BubbleView(bubble: Bubble(color: Color.blue, x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2, size: 50, type: .tap, tapCount: 2))
+    BubbleView(bubble: Bubble(color: Color.blue, boundary: UIScreen.main.bounds.size))
 }
 #endif
